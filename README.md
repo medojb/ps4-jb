@@ -3,7 +3,6 @@
 WebKit + kernel jailbreak host for PlayStation 4 firmware **13.52**, **14.00**, and **14.02**. After the stages succeed, the host loads **GoldHEN**.
 
 - **13.52 / 14.00 / 14.02** - Afterglow kernel stage
-- Legacy **hx1400** path for 14.00 still available with `?hx1400=1` if needed
 
 ## Live host
 
