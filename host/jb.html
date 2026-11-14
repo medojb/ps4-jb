@@ -119,21 +119,14 @@ body{
 }
 #status{display:none}
 body.running #status{display:block}
-#progWrap{display:none;width:100%;max-width:28rem;margin:.5rem auto}
-body.running #progWrap{display:block}
-#progTrack{
-  height:14px;border-radius:999px;background:#0d2b7a;border:1px solid #2a5fd4;
-  overflow:hidden;position:relative;
+#progWrap{display:none !important}
+#progTrack,#progBar,#progressPct,#progLabel{display:none !important}
+#elapsedMsg{
+  margin:.55rem 0 .65rem;color:#ffe566;font-weight:800;font-size:1.55rem;
+  letter-spacing:.04em;display:none;font-variant-numeric:tabular-nums;
 }
-#progBar{
-  display:block;height:100%;width:0;max-width:100%;
-  background:#ffe566;background:-webkit-linear-gradient(0deg,#ffe566,#ffd000);
-  background:linear-gradient(90deg,#ffe566,#ffd000);border-radius:999px;
-}
-#progressPct{margin:.45rem 0 0;font-size:1.35rem;font-weight:800;color:#ffe566}
-#progLabel{margin:.25rem 0 0;color:#d7e2ff;font-weight:700;font-size:.95rem}
-#elapsedMsg{margin:.35rem 0 .5rem;color:#d7e2ff;font-weight:700;font-size:1.05rem;display:none}
-body.running #elapsedMsg,body.done #elapsedMsg,body.fail #elapsedMsg{display:block}
+/* No live clock during jailbreak — only final time on done/fail */
+body.done #elapsedMsg,body.fail #elapsedMsg{display:block}
 #msg{display:none;margin:.1rem auto .35rem;font-size:1.55rem;font-weight:800}
 #msg.ok{color:#ffe566}
 #msg.bad{color:#ff8a8a}
@@ -220,19 +213,63 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
   #footer{right:0}
   .home-title{font-size:2.4rem}
 }
+
+.recent-head{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;gap:.5rem;margin:1.15rem 0 .45rem}
+.recent-head .label.slim{margin:0}
+.recent-head .mini{cursor:pointer;-webkit-user-select:none;user-select:none}
+.history{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:0;margin:.35rem 0 0}
+.hrow{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.92rem}
+.hrow:last-child{border:0}
+.hrow .ok{color:#7dffb3}.hrow .fail{color:#ff8a8a}.hrow .hang{color:#ffc857}
+.hrow .hmeta{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:.1rem;min-width:0}
+.hrow .hdate{display:block;font-weight:600;color:#9db0d8;font-variant-numeric:tabular-nums;font-size:.82rem}
+.hrow .hdur{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800}
+#historyEmpty{margin:.35rem 0 0;color:#9db0d8;font-size:.9rem}
+#historyEmpty[hidden]{display:none!important}
+.settings .mini.model-pick.on{background:#ffe566;color:#1239a8;border-color:#ffe566}
 </style>
   <link rel="preload" as="image" href="welcome-goldhen.jpg">
 </head>
-<body>\n<script>try{document.title='';}catch(e){}</script>
+<body>
+<script>
+window.__fbShowWelcomeNow = function () {
+  try {
+    var w = document.getElementById('ghWelcome');
+    if (w) {
+      w.setAttribute('aria-hidden', 'false');
+      w.style.display = 'block';
+      w.style.zIndex = '99999';
+      var img = w.getElementsByTagName('img')[0];
+      if (img && !img.__fbShown) {
+        img.__fbShown = 1;
+        try { img.src = 'welcome-goldhen.jpg'; } catch (e2) {}
+      }
+    }
+  } catch (e) {}
+  try { document.body.className = 'welcome'; } catch (e3) {}
+};
+window.jailbreakSuccess = function () {
+  try { sessionStorage.setItem('fb_jb_done', '1'); } catch (e) {}
+  try { if (typeof window.__fbShowWelcomeNow === 'function') window.__fbShowWelcomeNow(); } catch (e0) {}
+  try {
+    if (typeof window.__fbOnDone === 'function') {
+      window.__fbOnDone();
+      return;
+    }
+  } catch (e) {}
+  // __fbOnDone not ready yet; finishUI will show welcome
+};
+</script>
+<script>try{document.title='';}catch(e){}</script>
 <div id="ghWelcome" aria-hidden="true"><img src="welcome-goldhen.jpg" alt="Welcome to GoldHEN by SiSTRo" width="1280" height="720"></div>
 <div class="wrap">
-  <div class="ver-pill" id="appVer">13.52 / 14.00</div>
+  <div class="ver-pill" id="appVer">13.52-14.02</div>
 
   <div id="splash" aria-hidden="false">
     <main class="main">
       <section class="hero card home-panel" id="homeCard">
         <div class="home-deco" aria-hidden="true">
-          <div class="home-title"><span class="wk">PS4</span> 13.52 / 14.00 Jailbreak</div>
+          <div class="home-title"><span class="wk">PS4</span> 13.52 / 14.00 / 14.02 Jailbreak</div>
           <div class="home-div">
             <i></i>
             <svg class="home-lock" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -266,7 +303,7 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
   <main id="loader" hidden>
     <section class="hero card center postjb-card home-panel">
       <div class="home-deco" aria-hidden="true">
-        <div class="home-title" id="titleMsg"><span class="wk">PS4</span> 13.52 / 14.00 Jailbreak</div>
+        <div class="home-title" id="titleMsg"><span class="wk">PS4</span> 13.52 / 14.00 / 14.02 Jailbreak</div>
         <div class="home-div">
           <i></i>
           <svg class="home-lock" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -279,12 +316,12 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
         </div>
       </div>
       <p class="pill-run" id="status">Jailbreak started</p>
-      <div id="progWrap">
+      <div id="progWrap" hidden aria-hidden="true">
         <div id="progTrack"><div id="progBar"></div></div>
         <div id="progressPct">0%</div>
         <div id="progLabel">Ready</div>
       </div>
-      <p id="elapsedMsg">Elapsed 0:00</p>
+      <p id="elapsedMsg">0s</p>
       <p id="msg">DONE</p>
       <div id="successMsg"><span class="check"></span> Jailbroken</div>
       <div id="failMsg">Jailbreak failed - refresh the page and try again</div>
@@ -309,14 +346,20 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     <p class="label slim">Payload</p>
     <div class="opt" id="payloadTile">
       <span class="t">GoldHEN</span>
-      <span class="d" id="payloadVer">v2.4b18.13</span>
+      <span class="d" id="payloadVer">v2.4b18.14</span>
     </div>
-    <p class="hint" id="payloadHint">GoldHEN for FW 13.52 / 14.00</p>
+    <p class="hint" id="payloadHint">GoldHEN for FW 13.52 / 14.00 / 14.02</p>
     <p class="label slim">Timing</p>
     <div class="chip-row">
       <span class="mini" id="autoStartTile" tabindex="0" role="button" style="cursor:pointer">Auto-start <span id="autoStartState">Off</span></span>
     </div>
     <p class="hint" id="autoHint">Press to turn on. Starts the jailbreak 3 seconds after the page opens.</p>
+    <div class="recent-head">
+      <p class="label slim">Recent</p>
+      <span class="mini" id="historyClear" tabindex="0" role="button">Clear Log</span>
+    </div>
+    <div id="historyList" class="history"></div>
+    <p class="hint" id="historyEmpty">No runs yet</p>
   </section>
 
   <footer id="footer"><b>Developed by <a href="https://github.com/X-F1REBALL-X" target="_blank" rel="noopener">X-F1REBALL-X</a></b></footer>
@@ -328,7 +371,7 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
 
 <script>
 (function(){
-  var PAYLOAD = 'GoldHEN v2.4b18.13';
+  var PAYLOAD = 'GoldHEN v2.4b18.14';
   var CHAIN = 'GoldHEN';
   var b = document.getElementById('run');
   var bar = document.getElementById('progBar');
@@ -356,24 +399,143 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
   var elapsedTimer = 0;
   var elapsedStart = 0;
 
+  var elapsedFrozen = false;
+  var elapsedFinalMs = 0;
+  var HISTORY_KEY = 'ps4jb-run-history';
   function formatElapsed(ms) {
-    var s = Math.floor(ms / 1000);
-    var m = Math.floor(s / 60);
-    s = s % 60;
-    return m + ':' + (s < 10 ? '0' : '') + s;
+    var sec = Math.floor(Math.max(0, +ms) / 1000);
+    return sec + 's';
+  }
+  function formatLocalDateTime(ms) {
+    var d = new Date(typeof ms === 'number' ? ms : Date.now());
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return p(d.getMonth() + 1) + '-' + p(d.getDate())
+      + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+  function paintElapsed(str) {
+    if (elapsedMsgEl) elapsedMsgEl.textContent = str || '';
   }
   function startElapsed() {
-    if (elapsedTimer) return;
+    if (elapsedFrozen) return;
+    if (elapsedStart && elapsedTimer) return;
+    elapsedFrozen = false;
+    elapsedFinalMs = 0;
     elapsedStart = Date.now();
-    if (elapsedMsgEl) elapsedMsgEl.textContent = 'Elapsed 0:00';
+    paintElapsed(formatElapsed(0));
+    if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = 0; }
     elapsedTimer = setInterval(function () {
-      if (!elapsedMsgEl) return;
-      elapsedMsgEl.textContent = 'Elapsed ' + formatElapsed(Date.now() - elapsedStart);
-    }, 250);
+      if (!elapsedStart || elapsedFrozen) return;
+      paintElapsed(formatElapsed(Date.now() - elapsedStart));
+    }, 1000);
+  }
+  function freezeElapsed() {
+    if (elapsedFrozen) return;
+    if (!elapsedStart) return;
+    elapsedFrozen = true;
+    if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = 0; }
+    elapsedFinalMs = Math.max(0, Date.now() - elapsedStart);
+    paintElapsed(formatElapsed(elapsedFinalMs));
   }
   function stopElapsed() {
+    if (elapsedFrozen) {
+      paintElapsed(formatElapsed(elapsedFinalMs || 0));
+      return;
+    }
     if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = 0; }
+    if (elapsedStart) paintElapsed(formatElapsed(Date.now() - elapsedStart));
   }
+
+  window.__fbStartElapsed = function () {
+    try {
+      elapsedFrozen = false;
+      elapsedFinalMs = 0;
+      elapsedStart = 0;
+      if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = 0; }
+      startElapsed();
+      if (statusEl) statusEl.textContent = 'Jailbreaking';
+    } catch (e) {}
+  };
+
+  function loadHistory() {
+    try {
+      var raw = localStorage.getItem(HISTORY_KEY) || '[]';
+      var arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+  function saveHistoryEntry(entry) {
+    var arr = loadHistory();
+    if (entry && !entry.ts) entry.ts = Date.now();
+    arr.unshift(entry);
+    if (arr.length > 12) arr = arr.slice(0, 12);
+    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(arr)); } catch (e) {}
+    renderHistory();
+  }
+  function recordRun(result) {
+    var ms = elapsedFinalMs || (elapsedStart ? (Date.now() - elapsedStart) : 0);
+    var fw = '-';
+    try {
+      var el = document.getElementById('hiFw');
+      if (el && el.textContent) fw = el.textContent;
+    } catch (e) {}
+    saveHistoryEntry({
+      ts: Date.now(),
+      chain: CHAIN || 'Afterglow',
+      fw: fw,
+      result: result,
+      ms: ms,
+      duration: formatElapsed(ms)
+    });
+  }
+  function renderHistory() {
+    var list = document.getElementById('historyList');
+    var empty = document.getElementById('historyEmpty');
+    if (!list) return;
+    var arr = loadHistory();
+    list.innerHTML = '';
+    if (!arr.length) {
+      if (empty) empty.hidden = false;
+      return;
+    }
+    if (empty) empty.hidden = true;
+    for (var i = 0; i < Math.min(arr.length, 6); i++) {
+      var e = arr[i];
+      var row = document.createElement('div');
+      row.className = 'hrow';
+      var left = document.createElement('span');
+      left.className = 'hmeta';
+      if (e.ts) {
+        var ds = document.createElement('span');
+        ds.className = 'hdate';
+        ds.textContent = formatLocalDateTime(e.ts);
+        left.appendChild(ds);
+      }
+      var right = document.createElement('span');
+      var cls = e.result === 'ok' ? 'ok' : 'fail';
+      right.className = cls + ' hdur';
+      var dur = e.duration || (e.ms != null ? formatElapsed(e.ms) : '');
+      right.textContent = (e.result === 'ok' ? 'OK' : 'FAIL') + (dur ? ('  ' + dur) : '');
+      row.appendChild(left);
+      row.appendChild(right);
+      list.appendChild(row);
+    }
+  }
+  window.__fbRecordRun = recordRun;
+
+  function clearHistory() {
+    try { localStorage.setItem(HISTORY_KEY, '[]'); } catch (e) {}
+    renderHistory();
+  }
+  (function bindHistoryClear() {
+    var btn = document.getElementById('historyClear');
+    if (!btn) return;
+    function go() { clearHistory(); }
+    btn.onclick = go;
+    btn.onkeydown = function (e) {
+      var k = e.keyCode || e.which;
+      if (k === 13 || k === 32) { go(); if (e.preventDefault) e.preventDefault(); }
+    };
+  })();
 
   function setText(id, v) {
     var el = document.getElementById(id);
@@ -479,23 +641,43 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     if (!v) return '';
     v = String(v);
     try { v = decodeURIComponent(v); } catch (e) {}
+    v = v.replace(/\s+/g, ' ').trim();
     if (v === 'Fat' || v === 'Slim' || v === 'Pro') return v;
     var pipe = /^(CUH-[A-Z0-9]+)\|(Fat|Slim|Pro)$/i.exec(v);
     if (pipe) return pipe[1].toUpperCase() + '|' + pipe[2];
-    var spaced = /^(CUH-[A-Z0-9]+)\s+(Fat|Slim|Pro)$/i.exec(v);
+    var spaced = /^(CUH-[A-Z0-9]+)\s*[·•\-]?\s*(Fat|Slim|Pro)$/i.exec(v);
     if (spaced) return spaced[1].toUpperCase() + '|' + spaced[2];
-    var only = /^(CUH-[A-Z0-9]+)$/i.exec(v);
-    if (only) return only[1].toUpperCase();
+    var only = /(CUH-?[A-Z0-9]+)/i.exec(v);
+    if (only) {
+      var code = only[1].toUpperCase().replace(/^CUH(?!-)/, 'CUH-');
+      var k = (typeof kindFromCuh === 'function') ? kindFromCuh(code) : '';
+      return k ? (code + '|' + k) : code;
+    }
+    return '';
+  }
+  function kindFromCuh(code) {
+    var m = /CUH-?(\d{2})/i.exec(String(code || ''));
+    if (!m) return '';
+    var n = parseInt(m[1], 10);
+    if (n >= 70) return 'Pro';
+    if (n >= 20) return 'Slim';
+    if (n >= 10) return 'Fat';
     return '';
   }
   function displayModel(v) {
     if (!v) return '';
     if (v === 'Fat' || v === 'Slim' || v === 'Pro') return v;
     var pipe = /^(CUH-[A-Z0-9]+)\|(Fat|Slim|Pro)$/i.exec(v);
-    if (pipe) return pipe[2];
+    if (pipe) return pipe[1].toUpperCase() + ' · ' + pipe[2];
     var spaced = /^(CUH-[A-Z0-9]+)\s+(Fat|Slim|Pro)$/i.exec(v);
-    if (spaced) return spaced[2];
-    return '';
+    if (spaced) return spaced[1].toUpperCase() + ' · ' + spaced[2];
+    var only = /^(CUH-[A-Z0-9]+)$/i.exec(v);
+    if (only) {
+      var code = only[1].toUpperCase();
+      var k = kindFromCuh(code);
+      return k ? (code + ' · ' + k) : code;
+    }
+    return String(v);
   }
   function cachedModel() {
     try {
@@ -589,8 +771,8 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
       if (m5) fw = m5[1];
     }
     var kind = cachedModel();
-    if (kind) model = displayModel(kind) || '-';
-    else model = '-';
+    if (kind) model = displayModel(kind) || kind;
+    else if (!model || model === '-') model = 'PlayStation 4';
     var autoOn = autoEnabled();
 
     setText('hiModel', model);
@@ -602,7 +784,7 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     setText('ldChain', CHAIN);
     setText('autoStartState', autoOn ? 'On' : 'Off');
     if (fw && fw !== '-') {
-      setText('appVer', fw);
+      setText('appVer', '13.52-14.02');
       var ht = document.querySelector('.home-title');
       if (ht) ht.innerHTML = '<span class="wk">PS4</span> ' + fw + ' Jailbreak';
       var tm = document.getElementById('titleMsg');
@@ -617,6 +799,8 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     }
   }
   detectInfo();
+
+  renderHistory();
 
   (function detectIp() {
     var RTC = window.RTCPeerConnection || window.webkitRTCPeerConnection;
@@ -680,13 +864,7 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     if (label) label.textContent = 'Ready';
   };
   window.__fbProgress = function (pct, text) {
-    if (bar) {
-      var n = Math.max(0, Math.min(100, pct | 0));
-      if (n > maxPct) maxPct = n;
-      bar.style.width = maxPct + '%';
-      if (pctEl) pctEl.textContent = maxPct + '%';
-    }
-    if (label && text) label.textContent = text;
+    /* Timer-only UI: ignore percent, keep status label soft. */
     if (statusEl && text) statusEl.textContent = text;
   };
 
@@ -727,15 +905,17 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
     showLoader();
     maxPct = 0;
     setPayloadTag('WAIT', 'off');
-    startElapsed();
-    if (statusEl) statusEl.textContent = 'Jailbreak started';
-    window.__fbProgress(5, 'Ready');
+    if (elapsedMsgEl) elapsedMsgEl.textContent = '';
+    if (statusEl) statusEl.textContent = 'Preparing...';
+    /* Timer starts only when the real jailbreak chain begins (__fbStartElapsed). */
     detectInfo();
     var s = document.createElement('script');
     s.type = 'module';
-    s.src = './jb.js?v=fb-gh13k';
+    s.src = './jb.js?v=fb-stages1';
     s.onerror = function () {
       starting = false;
+      freezeElapsed();
+      try { recordRun('fail'); } catch (eR) {}
       stopElapsed();
       document.body.className = 'fail';
       showLoader();
@@ -783,6 +963,8 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
   }
 
   b.onclick = function () {
+    try { if (sessionStorage.getItem('fb_jb_done') === '1') { var s=document.getElementById('sub'); if (s) s.textContent='Already jailbroken this session. Close browser to retry.'; return; } } catch (e) {}
+
     if (b.disabled) return;
     cancelAutoTimer();
     try { sessionStorage.setItem(COUNT, '0'); } catch (e) {}
@@ -793,11 +975,13 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
   window.__fbOnSoftFail = function () {
     if (!wasStarted()) return;
     if (document.body.className.indexOf('done') >= 0 || document.body.className.indexOf('welcome') >= 0) { clearAuto(); return; }
+    freezeElapsed();
     stopElapsed();
     setPayloadTag('WAIT', 'off');
     applyRetryStyle();
     var n = bumpAuto();
     if (n > LIMIT) {
+      try { recordRun('fail'); } catch (eR) {}
       starting = false;
       try {
         var bb = document.getElementById('run');
@@ -805,53 +989,59 @@ body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .v
       } catch (e) {}
       return;
     }
+    /* Only log the final give-up — intermediate auto-retries clutter Recent. */
+    if (statusEl) statusEl.textContent = 'Retrying (' + n + '/' + LIMIT + ')...';
+    /* Same short gap as origin/master (repo almost lands first try). */
     setTimeout(function () {
       try { location.reload(); } catch (e) {}
     }, 100);
   };
 
   window.__fbOnDone = function () {
+    if (window.__fbDoneOnce) return;
+    window.__fbDoneOnce = 1;
     clearAuto();
+    freezeElapsed();
+    try { recordRun('ok'); } catch (eR) {}
     stopElapsed();
     try {
       if (typeof window.__fbSetPayload === 'function') window.__fbSetPayload(true);
     } catch (e) {}
-    try {
-      var w = document.getElementById('ghWelcome');
-      if (w) {
-        w.setAttribute('aria-hidden', 'false');
-        w.style.display = 'block';
-        w.style.zIndex = '99999';
-        var img = w.getElementsByTagName('img')[0];
-        if (img) {
-          try { img.src = 'welcome-goldhen.jpg?v=gh13'; } catch (e2) {}
-        }
-      }
-    } catch (e) {}
-    document.body.className = 'welcome';
+    try { if (typeof window.__fbShowWelcomeNow === 'function') window.__fbShowWelcomeNow(); } catch (e) {}
     detectInfo();
-    // Show SiSTRo welcome 3s, then leave/close the page.
-    setTimeout(function () {
-      var left = false;
+    // Show SiSTRo welcome briefly, then force a blank page (PS4 often ignores back/close).
+    function leaveWelcome() {
+      try { window.close(); } catch (e0) {}
       try {
-        if (typeof history !== 'undefined' && history.length > 1) {
-          history.go(-1); left = true;
-        }
-      } catch (e) {}
-      if (!left) {
-        try { history.back(); left = true; } catch (e) {}
-      }
-      try { window.close(); } catch (e) {}
+        if (typeof history !== 'undefined' && history.length > 1) history.go(-1);
+      } catch (e1) {}
+      try { history.back(); } catch (e2) {}
       setTimeout(function () {
         try {
-          if (document.body && document.body.className.indexOf('welcome') >= 0) {
-            document.open();
-            document.write('<!doctype html><html><head><meta charset="utf-8"><title></title><style>html,body{margin:0;background:#000;height:100%;width:100%}</style></head><body></body></html>');
-            document.close();
-          }
-        } catch (e) {}
-      }, 400);
-    }, 3000);
+          document.open();
+          document.write('<!doctype html><html><head><meta charset="utf-8"><title></title><style>html,body{margin:0;background:#000;height:100%;width:100%}</style></head><body></body></html>');
+          document.close();
+        } catch (e3) {
+          try {
+            document.body.className = 'done';
+            var w = document.getElementById('ghWelcome');
+            if (w) { w.style.display = 'none'; w.setAttribute('aria-hidden', 'true'); }
+            var splash = document.getElementById('splash');
+            if (splash) { splash.hidden = true; }
+            var loader = document.getElementById('loader');
+            if (loader) { loader.hidden = false; }
+          } catch (e4) {}
+        }
+      }, 250);
+    }
+    setTimeout(leaveWelcome, 2500);
+    try {
+      var wTap = document.getElementById('ghWelcome');
+      if (wTap && !wTap.__fbLeaveBound) {
+        wTap.__fbLeaveBound = 1;
+        wTap.onclick = function () { leaveWelcome(); };
+      }
+    } catch (eT) {}
   };
   var hide = function () {
     var w = document.getElementById('wrap');

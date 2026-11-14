@@ -651,8 +651,8 @@ PS4["14.00"] = Object.assign({}, PS4["13.52"], {
   fw_status:
     "state=14.00-dev " +
     "webkit=13.52-identical " +
-    "kernel=provided-by-fb_tables.js " +
-    "hx-path",
+    "kernel=afterglow " +
+    "payload=hen.bin|payload.bin-GoldHEN-v2.4b18.14",
 
   payload: "payload.bin",
   kpatch: "1400.bin",
@@ -680,6 +680,18 @@ PS4["14.00"] = Object.assign({}, PS4["13.52"], {
 
   k_prison0: undefined,
   k_rootvnode: undefined,
+});
+
+
+PS4["14.02"] = Object.assign({}, PS4["14.00"], {
+  alias_of: "13.52-webkit",
+  fw_status:
+    "state=14.02-local-test " +
+    "webkit=13.52-identical " +
+    "kernel=afterglow " +
+    "payload=hen.bin|payload.bin-GoldHEN-v2.4b18.14",
+  payload: "payload.bin",
+  kpatch: "1400.bin",
 });
 
 export function offsetsFor(uaString) {

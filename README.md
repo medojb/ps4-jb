@@ -1,9 +1,9 @@
-# PS4 13.52 / 14.00 Jailbreak
+# PS4 13.52 / 14.00 / 14.02 Jailbreak
 
-WebKit + kernel jailbreak host for PlayStation 4 firmware **13.52** and **14.00**. After the stages succeed, the host loads **GoldHEN**.
+WebKit + kernel jailbreak host for PlayStation 4 firmware **13.52**, **14.00**, and **14.02**. After the stages succeed, the host loads **GoldHEN**.
 
-- **13.52** — classic kpatch path + `patches/1352.bin` (verified on hardware)
-- **14.00** — `hx1400` / kevent path + `patches/1400.bin`
+- **13.52 / 14.00 / 14.02** - Afterglow kernel stage (local test)
+- Legacy **hx1400** path for 14.00 still available with `?hx1400=1` if needed
 
 ## Live host
 
@@ -11,8 +11,8 @@ https://x-f1reball-x.github.io/ps4-jb/
 
 ## Payload
 
-- **GoldHEN v2.4b18.13** (`hen.bin` / `payload.bin`, 297496 bytes)
-- sha256 `39452f5e1c305ac9efcb4745eef7958b4db8c6d85299529f08700970b009ea4d`
+- **GoldHEN v2.4b18.14** (`hen.bin` / `payload.bin`, 298776 bytes)
+- sha256 `c5480587d99efc2e3cc132352d9b7cf052dd3068280f1686e7fbb37d57e9ba8b`
 
 ## How to use
 
@@ -32,8 +32,9 @@ HTTP on port **8080**. On the PS4 browser: `http://<your-pc-lan-ip>:8080/jb.html
 
 ## Credits
 
-- **well0nez / m0zz** - WebKit + kernel exploit chain (afterglow)
+- **well0nez / m0zz** - WebKit + kernel exploit chain (afterglow), including 14.02 tables
 - **SiSTR0 / GoldHEN team** - GoldHEN
+- **ArabPixel / WebKitty** - Afterglow host packaging used for the local test
 - **X-F1REBALL-X** - this host
 
 ## Disclaimer

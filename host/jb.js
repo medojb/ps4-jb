@@ -11,13 +11,14 @@ let passCount = 0,
 let armedEver = false;
 const params = new URLSearchParams(location.search);
 (function () {
-  // 14.00 uses fb_kevent (hx1400); 13.52 uses classic kpatch + patches/1352.bin
-  let hxDefault = "1";
+  // 13.52 / 14.00 / 14.02 use afterglow; legacy hx1400 via ?hx1400=1
+  let hxDefault = "0";
   try {
     const m = (navigator.userAgent || "").match(/PlayStation\s+4[\/ ](\d+)\.(\d+)/);
     if (m) {
       const key = m[1] + "." + parseInt(m[2], 16).toString(16).padStart(2, "0");
-      if (key !== "14.00") hxDefault = "0";
+      // legacy hx1400 path only if explicitly requested
+      if (false && key === "14.00") hxDefault = "1";
     }
   } catch (e) {}
   const d = {
@@ -259,15 +260,31 @@ function mark(tag, detail, synchronous = false) {
   } else {
     try {
       var pct = 8;
-      var label = "Ready";
-      if (/ATTEMPT-START|CORE|PRIMITIVE|ADDROF|AUTO-RETRY/i.test(tag)) { pct = 20; label = "Ready"; }
-      if (/PAIR|FW|OFFSET|BUILD/i.test(tag)) { pct = 30; label = "Ready"; }
+      var label = "Preparing";
+      var d = (detail == null) ? "" : String(detail);
+      if (/PAIR|FW|OFFSET|BUILD|BASES/i.test(tag)) { pct = 30; label = "Preparing"; }
+      if (/^AFTERGLOW$/i.test(tag)) { pct = 40; label = "Jailbreaking"; }
+      if (/ATTEMPT-START|CORE|PRIMITIVE|ADDROF|AUTO-RETRY/i.test(tag)) { pct = 20; label = "Jailbreaking"; }
       if (/KV-|KBASE|KERNEL|ROUTE/i.test(tag)) { pct = 55; label = "Jailbreaking"; }
-      if (/HEN|PAYLOAD|STAGE10|L-HEN|PATCH/i.test(tag)) { pct = 85; label = "Loading"; }
-      if (/DONE|PASS|SUCCESS|FINAL/i.test(tag)) { pct = 95; label = "Loading"; }
+      if (/HEN|PAYLOAD|STAGE10|L-HEN|PATCH/i.test(tag)) { pct = 85; label = "Loading GoldHEN"; }
+      if (/DONE|PASS|SUCCESS|FINAL/i.test(tag)) { pct = 95; label = "Almost done"; }
+      // Afterglow stages (tag is always AG)
+      if (/^AG$/i.test(tag)) {
+        pct = 40; label = "Jailbreaking";
+        if (/attempt|libc|gadget|probe|stubs|ps4 kernel exploit/i.test(d)) { pct = 42; label = "Jailbreaking"; }
+        if (/\[1\]|leak|anchor|kbase|kernel base/i.test(d)) { pct = 48; label = "Jailbreaking"; }
+        if (/\[2\]|\[3|spray|trigger|shot|probe fd/i.test(d)) { pct = 58; label = "Jailbreaking"; }
+        if (/\[4\]|\[5\]|\[6\]|mapping|widen|kernel patched|rwx is open/i.test(d)) { pct = 68; label = "Jailbreaking"; }
+        if (/\[rw\]|\[t\]|padding|handles|device table/i.test(d)) { pct = 74; label = "Jailbreaking"; }
+        if (/\[7\]|\[8\]|gate|kernel patches/i.test(d)) { pct = 78; label = "Jailbreaking"; }
+        if (/\[9\]|jailbroken, uid/i.test(d)) { pct = 82; label = "Loading GoldHEN"; }
+        if (/\[10\]|interface is live|handles defused|already open/i.test(d)) { pct = 85; label = "Loading GoldHEN"; }
+        if (/\[g\]|\[p\]|\[e\]|goldhen|payload|pthread|bytes at|enabler|trampoline/i.test(d)) { pct = 92; label = "Loading GoldHEN"; }
+        if (/payload loaded successfully/i.test(d)) { pct = 96; label = "Almost done"; }
+        if (/done -- jailbroken/i.test(d)) { pct = 98; label = "Almost done"; }
+      }
+      if (/AFTERGLOW-SKIP/i.test(tag)) { pct = 100; label = "DONE"; }
       if (typeof window.__fbProgress === "function") window.__fbProgress(pct, label);
-      var st = document.getElementById("status");
-      if (st) st.textContent = "";
     } catch (e) {}
   }
 
@@ -286,14 +303,15 @@ function state(t, c) {
     stateEl.className = c || "";
   }
   try {
-    var st = document.getElementById("status");
-    if (st) st.textContent = "";
     if (typeof window.__fbProgress === "function") {
-      var label = "Ready";
-      var pct = 40;
-      if (t && /kernel/i.test(String(t))) { pct = 55; label = "Jailbreaking"; }
-      else if (t && /payload|hen/i.test(String(t))) { pct = 85; label = "Loading"; }
-      else if (t && /prim/i.test(String(t))) { pct = 25; label = "Ready"; }
+      var label = "Preparing";
+      var pct = 35;
+      var ts = t ? String(t) : "";
+      if (/prim|webkit/i.test(ts)) { pct = 25; label = "Jailbreaking"; }
+      if (/afterglow/i.test(ts)) { pct = 40; label = "Jailbreaking"; }
+      if (/kernel/i.test(ts)) { pct = 55; label = "Jailbreaking"; }
+      if (/payload|hen|goldhen/i.test(ts)) { pct = 88; label = "Loading GoldHEN"; }
+      if (/already jailbroken/i.test(ts)) { pct = 100; label = "DONE"; }
       window.__fbProgress(pct, label);
     }
   } catch (e) {}
@@ -436,8 +454,7 @@ let allDone = false,
 
       const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;
 
-      const carrier = await establishPrimitive({
-        maxAttempts: 3,
+      const carrier = await establishPrimitive({ maxAttempts: 3,
         onEvent: function (tag, detail, attempt) {
           const writer = PRIMITIVE_LOUD.test(tag) ? mark : trace;
 
@@ -512,7 +529,8 @@ let allDone = false,
     const KEEP_JB = params.get("keepjb") === "1";
 
     const FB1400_MODE = params.get("hx1400") === "1";
-    const NEED_K = FB1400_MODE ? [] : [
+    const AFTERGLOW_MODE = fwKey === "14.02" || fwKey === "14.00" || fwKey === "13.52" || params.get("afterglow") === "1";
+    const NEED_K = (FB1400_MODE || AFTERGLOW_MODE) ? [] : [
       "k_idt_rsvd",
       "k_oid_kern_file",
       "k_oid_maxfilesperproc",
@@ -543,7 +561,10 @@ let allDone = false,
     const KPATCH_FILE =
       "patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
     const PAYLOAD_FILE = off.payload || "payload.bin";
-    const needPatch = FB1400_MODE ? [] : ["k_sysent_661", "k_jmp_rsi"].filter(
+    /* No early payload/module warm: PS4 browser OOM during spray if both sit in RAM. */
+    var __fbAgImport = null;
+    var __fbPayloadWarm = null;
+    const needPatch = (FB1400_MODE || AFTERGLOW_MODE) ? [] : ["k_sysent_661", "k_jmp_rsi"].filter(
       (k) => off[k] === undefined,
     );
     if (
@@ -558,7 +579,7 @@ let allDone = false,
       )
     )
       return;
-    const needPl = FB1400_MODE ? [] : ["wk___imp_pthread_create", "k_pthread_create"].filter(
+    const needPl = (FB1400_MODE || AFTERGLOW_MODE) ? [] : ["wk___imp_pthread_create", "k_pthread_create"].filter(
       (k) => off[k] === undefined,
     );
     if (
@@ -665,8 +686,7 @@ let allDone = false,
     let entryCount = 0;
     let carrier;
     try {
-      carrier = await establishPrimitive({
-        maxAttempts: 3,
+      carrier = await establishPrimitive({ maxAttempts: 3,
         onEvent: (t, d, a) => {
           entryCount++;
           entryEvents.push(t + (a == null ? "" : "[" + a + "]"));
@@ -703,7 +723,7 @@ let allDone = false,
     const errorFn = p.read8(webkitBase.add32(off.wk___imp___error));
     let libkernelBase = errorFn.sub32(off.k__error);
 
-    if (FB1400_MODE || PROBE_MODE) {
+    if (FB1400_MODE || AFTERGLOW_MODE || PROBE_MODE) {
       const libkernelAdjust =
         libkernelBase.low & 0x3fff;
 
@@ -1223,6 +1243,71 @@ let allDone = false,
         finishUI(false);
         return;
       }
+    }
+
+
+    if (AFTERGLOW_MODE) {
+      try {
+        if (sessionStorage.getItem("fb_jb_done") === "1") {
+          mark("AFTERGLOW-SKIP", "already succeeded this browser session");
+          state("already jailbroken", "ok");
+          finishUI(true);
+          return;
+        }
+      } catch (e) {}
+      mark("AFTERGLOW", "fw=" + fwKey + " payload=" + PAYLOAD_FILE);
+      state("afterglow (" + fwKey + ")...", "warn");
+      try {
+        if (typeof window.__fbStartElapsed === "function") window.__fbStartElapsed();
+      } catch (eT) {}
+      try {
+        sessionStorage.setItem("payload_path", PAYLOAD_FILE);
+      } catch (e) {}
+      if (!params.has("payload")) params.set("payload", PAYLOAD_FILE);
+      if (!params.has("mode")) params.set("mode", "goldhen");
+      let agOk = false, agRan = false;
+      try {
+        const ag = await import("./afterglow.js");
+        const agCtx = {
+          p: p,
+          callAddr: callAddr,
+          bufAddr: bufAddr,
+          errno: errno,
+          params: params,
+          keepAlive: keepAlive,
+          mark: mark,
+          state: state,
+          libkernelBase: libkernelBase,
+          webkitBase: webkitBase,
+          stubAddr: stubAddr,
+          off: off,
+          fw: fwKey,
+        };
+        if (params.get("afterglow") === "probe") {
+          const probed = ag.probeAfterglow(agCtx);
+          agOk = !!(probed && probed.ok);
+          mark("AFTERGLOW-PROBE", agOk ? "ok" : JSON.stringify(probed && probed.reasons));
+        } else {
+          agRan = true;
+          try { window.__fbWarmPayload = null; } catch (e) {}
+          agOk = !!(await ag.runAfterglow(agCtx));
+        }
+      } catch (agError) {
+        mark("AG-FAIL", agError && agError.message ? agError.message : String(agError));
+      }
+      try {
+        if (agOk) {
+          try { sessionStorage.setItem("fb_jb_done", "1"); } catch (e) {}
+          try {
+            if (window.__fbLastModel && typeof window.__fbSaveModel === "function") {
+              window.__fbSaveModel(window.__fbLastModel);
+            }
+          } catch (eM) {}
+        }
+      } catch (e) {}
+      // finishUI -> __fbOnDone shows GoldHEN welcome splash
+      finishUI(agOk);
+      return;
     }
 
     if (params.get("hx1400") === "1") {
