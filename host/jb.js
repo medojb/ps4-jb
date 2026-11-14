@@ -208,7 +208,7 @@ function finishUI(ok) {
       var st = document.getElementById("status");
       if (st) st.style.display = "none";
     } catch (e) {}
-    // Leave after DONE is shown. Do NOT navigate to about:blank —
+    // Leave after DONE is shown. Do NOT navigate to about:blank -
     // PS4 browser keeps that as a home tile and cannot truly close tabs.
   } else {
     try {

@@ -125,7 +125,7 @@ body.running #status{display:block}
   margin:.55rem 0 .65rem;color:#ffe566;font-weight:800;font-size:1.55rem;
   letter-spacing:.04em;display:none;font-variant-numeric:tabular-nums;
 }
-/* No live clock during jailbreak — only final time on done/fail */
+/* No live clock during jailbreak - only final time on done/fail */
 body.done #elapsedMsg,body.fail #elapsedMsg{display:block}
 #msg{display:none;margin:.1rem auto .35rem;font-size:1.55rem;font-weight:800}
 #msg.ok{color:#ffe566}
@@ -194,7 +194,7 @@ body.done #progBar{width:100%!important;background:#ffe566;background:-webkit-li
 body.running #splash,body.done #splash,body.fail #splash{display:none!important}
 body.running #loader,body.done #loader,body.fail #loader{display:-webkit-box;display:-webkit-flex;display:flex}
 
-/* Welcome splash after GoldHEN ג€” img (PS4 WebKit often skips CSS backgrounds) */
+/* Welcome splash after GoldHEN - img (PS4 WebKit often skips CSS backgrounds) */
 #ghWelcome{
   display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:99999;
   margin:0;padding:0;background:#1848c8;overflow:hidden;
@@ -372,7 +372,7 @@ window.jailbreakSuccess = function () {
 <script>
 (function(){
   var PAYLOAD = 'GoldHEN v2.4b18.14';
-  var CHAIN = 'GoldHEN';
+  var CHAIN = 'Afterglow';
   var b = document.getElementById('run');
   var bar = document.getElementById('progBar');
   var label = document.getElementById('progLabel');
@@ -645,7 +645,7 @@ window.jailbreakSuccess = function () {
     if (v === 'Fat' || v === 'Slim' || v === 'Pro') return v;
     var pipe = /^(CUH-[A-Z0-9]+)\|(Fat|Slim|Pro)$/i.exec(v);
     if (pipe) return pipe[1].toUpperCase() + '|' + pipe[2];
-    var spaced = /^(CUH-[A-Z0-9]+)\s*[·•\-]?\s*(Fat|Slim|Pro)$/i.exec(v);
+    var spaced = /^(CUH-[A-Z0-9]+)\s*[--\-]?\s*(Fat|Slim|Pro)$/i.exec(v);
     if (spaced) return spaced[1].toUpperCase() + '|' + spaced[2];
     var only = /(CUH-?[A-Z0-9]+)/i.exec(v);
     if (only) {
@@ -668,14 +668,14 @@ window.jailbreakSuccess = function () {
     if (!v) return '';
     if (v === 'Fat' || v === 'Slim' || v === 'Pro') return v;
     var pipe = /^(CUH-[A-Z0-9]+)\|(Fat|Slim|Pro)$/i.exec(v);
-    if (pipe) return pipe[1].toUpperCase() + ' · ' + pipe[2];
+    if (pipe) return pipe[1].toUpperCase() + ' - ' + pipe[2];
     var spaced = /^(CUH-[A-Z0-9]+)\s+(Fat|Slim|Pro)$/i.exec(v);
-    if (spaced) return spaced[1].toUpperCase() + ' · ' + spaced[2];
+    if (spaced) return spaced[1].toUpperCase() + ' - ' + spaced[2];
     var only = /^(CUH-[A-Z0-9]+)$/i.exec(v);
     if (only) {
       var code = only[1].toUpperCase();
       var k = kindFromCuh(code);
-      return k ? (code + ' · ' + k) : code;
+      return k ? (code + ' - ' + k) : code;
     }
     return String(v);
   }
@@ -989,7 +989,7 @@ window.jailbreakSuccess = function () {
       } catch (e) {}
       return;
     }
-    /* Only log the final give-up — intermediate auto-retries clutter Recent. */
+    /* Only log the final give-up - intermediate auto-retries clutter Recent. */
     if (statusEl) statusEl.textContent = 'Retrying (' + n + '/' + LIMIT + ')...';
     /* Same short gap as origin/master (repo almost lands first try). */
     setTimeout(function () {
