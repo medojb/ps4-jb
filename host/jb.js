@@ -2366,10 +2366,10 @@ const pid = sc(SYS.getpid).i32;
     const N0SINK = snkAd.add32(0x20);
 
     const MAXN = 2 * KA + KB + 16;
-    const arAb = new ArrayBuffer(NODE_SZ * MAXN);
-    keepAlive.push(arAb);
-    const arDv = new DataView(arAb),
-      arAd = bufAddr(arAb);
+    const nodeAb = new ArrayBuffer(NODE_SZ * MAXN);
+    keepAlive.push(nodeAb);
+    const nodeDv = new DataView(nodeAb),
+      nodeAd = bufAddr(nodeAb);
     mark(
       "PR-ARENA",
       "nodes=" +
@@ -2377,18 +2377,18 @@ const pid = sc(SYS.getpid).i32;
         " bytes=0x" +
         (NODE_SZ * MAXN).toString(16) +
         " @" +
-        arAd,
+        nodeAd,
     );
 
     function wnode(i, decAddr, sinkAddr, last) {
       const o = i * NODE_SZ;
-      put(arDv, o + 0x00, decAddr);
-      put(arDv, o + 0x08, sinkAddr);
-      put(arDv, o + 0x10, M_AD);
-      put(arDv, o + 0x18, 0);
-      put(arDv, o + 0x20, 0);
-      put(arDv, o + 0x28, 0);
-      put(arDv, o + 0x30, last ? 0 : arAd.add32(o + NODE_SZ));
+      put(nodeDv, o + 0x00, decAddr);
+      put(nodeDv, o + 0x08, sinkAddr);
+      put(nodeDv, o + 0x10, M_AD);
+      put(nodeDv, o + 0x18, 0);
+      put(nodeDv, o + 0x20, 0);
+      put(nodeDv, o + 0x28, 0);
+      put(nodeDv, o + 0x30, last ? 0 : nodeAd.add32(o + NODE_SZ));
     }
 
     let lastFire = {
@@ -2528,10 +2528,10 @@ const pid = sc(SYS.getpid).i32;
       mU32[OWNER_HI] = 0;
       let a = "ok reused";
       if (fireIdx >= FIRES) {
-        const n0save = arAb.slice(0, NODE_SZ);
+        const n0save = nodeAb.slice(0, NODE_SZ);
         reapNow("pre-arm a=" + armCount);
-        new Uint8Array(arAb, 0, NODE_SZ).set(new Uint8Array(n0save));
-        setNode0(arAd, N0SINK);
+        new Uint8Array(nodeAb, 0, NODE_SZ).set(new Uint8Array(n0save));
+        setNode0(nodeAd, N0SINK);
         a = armOnce();
         if (a.indexOf("ok") !== 0) {
           mark("PR-ARM-FAIL", label + " " + a);
@@ -2539,7 +2539,7 @@ const pid = sc(SYS.getpid).i32;
         }
         fireIdx = 0;
       } else {
-        setNode0(arAd, N0SINK);
+        setNode0(nodeAd, N0SINK);
       }
       const fireN = fireIdx;
       sc(SYS.aio_multi_cancel, idAd2.add32(4 * fireIdx), 1, stAd2);
@@ -2964,7 +2964,7 @@ const pid = sc(SYS.getpid).i32;
           wnode(idx++, probeAd, anAd.add32((q * SWEEP + k) * 4), false);
         }
       }
-      put(arDv, (idx - 1) * NODE_SZ + 0x30, 0);
+      put(nodeDv, (idx - 1) * NODE_SZ + 0x30, 0);
       if (runChain(idx, "anchor-sweep") === null) return;
       if (!fireOk("anchor-sweep")) return;
     }
@@ -3128,7 +3128,7 @@ const pid = sc(SYS.getpid).i32;
       sDv.setInt32(0, 0x40000000, true);
       let i = 0;
       for (let k = 0; k < n; k++) wnode(i++, addr, sAd, false);
-      put(arDv, (i - 1) * NODE_SZ + 0x30, 0);
+      put(nodeDv, (i - 1) * NODE_SZ + 0x30, 0);
       if (runChain(i, label) === null) return null;
       if (!fireOk(label)) return null;
       const m = 0x40000000 - sDv.getInt32(0, true);
@@ -3146,7 +3146,7 @@ const pid = sc(SYS.getpid).i32;
         wnode(i++, stepAd, DUM, false);
         wnode(i++, probeAd, sAd.add32(k * 4), false);
       }
-      put(arDv, (i - 1) * NODE_SZ + 0x30, 0);
+      put(nodeDv, (i - 1) * NODE_SZ + 0x30, 0);
       if (runChain(i, label) === null) return null;
       if (!fireOk(label)) return null;
       let obs = "";
@@ -3337,7 +3337,7 @@ const pid = sc(SYS.getpid).i32;
         return jobs.map(function () {
           return null;
         });
-      put(arDv, (i - 1) * NODE_SZ + 0x30, 0);
+      put(nodeDv, (i - 1) * NODE_SZ + 0x30, 0);
       if (runChain(i, label) === null) return null;
       if (!fireOk(label)) return null;
       const out = [];
@@ -3465,7 +3465,7 @@ const pid = sc(SYS.getpid).i32;
       let i = emitSub(O_NUM, 0, pNum);
       wnode(i++, O_VIS, DUM, false);
       for (let q = 0; q < capsPend; q++) wnode(i++, CAPS_B, DUM, false);
-      put(arDv, (i - 1) * NODE_SZ + 0x30, 0);
+      put(nodeDv, (i - 1) * NODE_SZ + 0x30, 0);
       mark(
         "KF-WRITE",
         "restore_oid_number=" +
@@ -3592,7 +3592,7 @@ const pid = sc(SYS.getpid).i32;
           wnode(i++, A_OID.add32(0x18 + posA[k]), DUM, false);
         for (let k = 0; k < posA2.length; k++)
           wnode(i++, A2_OID.add32(0x18 + posA2[k]), DUM, false);
-        put(arDv, (i - 1) * NODE_SZ + 0x30, 0);
+        put(nodeDv, (i - 1) * NODE_SZ + 0x30, 0);
         mark(
           "KRW-FIRE",
           "nodes=" +
