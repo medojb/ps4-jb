@@ -38,3 +38,7 @@ HTTP on port **8080**. On the PS4 browser: `http://<your-pc-lan-ip>:8080/jb.html
 ## Disclaimer
 
 Educational / research use on consoles you own. Use at your own risk.
+
+## License
+
+GNU Affero General Public License v3.0. See `LICENSE`.
