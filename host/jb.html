@@ -1,23 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title></title>
+<title>المنسي لخدمات البلايستيشن</title>
 <style>
 *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}
 html,body{height:100%}
 body{
-  font:16px/1.4 "Segoe UI","SF Pro Display","Helvetica Neue",system-ui,sans-serif;
-  color:#ffe566;
-  background:#1848c8;
+  font:16px/1.55 "Segoe UI","SF Pro Display","Helvetica Neue",Tahoma,system-ui,sans-serif;
+  color:#f8fafc;
+  background:#070b14;
+  background:-webkit-radial-gradient(top left,#0f1c3a 0%,#070b14 65%);
+  background:radial-gradient(circle at 20% 15%,#0f1c3a 0%,#070b14 65%);
   min-height:100%;
   overflow-x:hidden;
 }
 .wrap{
   display:-webkit-box;display:-webkit-flex;display:flex;
   -webkit-flex-direction:column;flex-direction:column;
-  min-height:100vh;padding:1.1rem 1.4rem 2.8rem;padding-right:24.4rem;
+  min-height:100vh;padding:1.2rem 1.5rem 2.8rem;padding-left:24.5rem;
 }
 #splash{
   -webkit-box-flex:1;-webkit-flex:1 0 auto;flex:1 0 auto;
@@ -33,51 +35,111 @@ body{
   padding:0 0 .5rem;
 }
 .ver-pill{
-  position:fixed;top:1rem;right:24.2rem;z-index:30;
-  padding:.32rem .9rem;border-radius:999px;background:#1239a8;
-  border:2px solid #ffe566;color:#ffe566;font-size:.9rem;font-weight:800;
-  letter-spacing:.02em;box-shadow:0 4px 12px rgba(0,0,0,.25);
+  position:fixed;top:1.1rem;left:24.3rem;z-index:30;
+  padding:.38rem 1rem;border-radius:999px;
+  background:rgba(15,23,42,.92);
+  border:1.5px solid #00d4ff;color:#00d4ff;
+  font-size:.88rem;font-weight:800;letter-spacing:.03em;
+  box-shadow:0 4px 16px rgba(0,212,255,.18);
+  direction:ltr;
 }
 #homeCard{
-  width:min(720px,100%);margin:0 auto .35rem;padding:1.1rem 2rem 1rem;text-align:center;
-  background:#1239a8;border:2px solid #2a5fd4;border-radius:26px;
-  box-shadow:0 8px 28px rgba(0,0,0,.28);
+  width:min(740px,100%);margin:0 auto .5rem;padding:1.5rem 2.2rem 1.4rem;text-align:center;
+  background:#0f172a;border:1.5px solid #1e293b;border-radius:24px;
+  box-shadow:0 14px 40px rgba(0,0,0,.55);
   display:-webkit-box;display:-webkit-flex;display:flex;
   -webkit-flex-direction:column;flex-direction:column;
 }
-.home-deco{text-align:center;margin-bottom:.6rem;-webkit-box-ordinal-group:0;order:-2}
-.home-title{
-  font-size:3.2rem;font-weight:900;letter-spacing:.01em;line-height:1.05;color:#ffe566;
-  text-shadow:0 2px 0 #c9a400,0 4px 0 #a68600,0 6px 10px rgba(0,0,0,.35);
+.brand-box{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-flex-direction:column;flex-direction:column;
+  -webkit-align-items:center;align-items:center;
+  margin:0 auto .85rem;padding:.75rem 1.5rem .8rem;
+  border-radius:20px;
+  background:rgba(251,191,36,.08);
+  border:1.5px solid rgba(251,191,36,.55);
+  box-shadow:0 6px 20px rgba(251,191,36,.12);
+  -webkit-box-ordinal-group:0;order:-3;
+  max-width:100%;
 }
-.home-title .wk{color:#fff;-webkit-text-fill-color:#fff;text-shadow:0 2px 0 #0a1f66,0 4px 0 #07164a,0 6px 10px rgba(0,0,0,.35)}
+.brand-badge{
+  display:inline-block;
+  color:#fbbf24;
+  font-size:1.35rem;font-weight:900;letter-spacing:0;line-height:1.3;
+}
+.brand-services{
+  margin-top:.25rem;
+  color:#e2e8f0;
+  font-size:.95rem;font-weight:800;letter-spacing:0;
+}
+.brand-contact{
+  display:-webkit-inline-box;display:-webkit-inline-flex;display:inline-flex;
+  -webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;
+  margin-top:.45rem;
+  padding:.28rem .85rem;
+  border-radius:999px;
+  background:#090d1a;
+  border:1px solid #1e293b;
+  color:#34d399;
+  font-size:1rem;font-weight:900;
+  direction:ltr;
+}
+.brand-icons{
+  display:-webkit-inline-box;display:-webkit-inline-flex;display:inline-flex;
+  -webkit-align-items:center;align-items:center;
+  margin-right:.45rem;
+}
+.brand-icon{
+  display:-webkit-inline-box;display:-webkit-inline-flex;display:inline-flex;
+  -webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  margin-right:.28rem;
+}
+.brand-icon.phone{background:rgba(0,212,255,.16);color:#00d4ff}
+.brand-icon.wa{background:rgba(37,211,102,.18);color:#25d366}
+.brand-phone-num{letter-spacing:.03em;color:#f8fafc}
+.home-deco{text-align:center;margin-bottom:.9rem;-webkit-box-ordinal-group:0;order:-2}
+.home-title{
+  font-size:2.65rem;font-weight:900;letter-spacing:.01em;line-height:1.15;color:#ffffff;
+  text-shadow:0 4px 18px rgba(0,212,255,.25);
+}
+.home-title .wk{color:#00d4ff;-webkit-text-fill-color:#00d4ff}
 .home-div{
   display:-webkit-box;display:-webkit-flex;display:flex;
   -webkit-align-items:center;align-items:center;
   -webkit-justify-content:center;justify-content:center;
-  margin:.4rem auto 0;color:#ffe566;
+  margin:.65rem auto 0;color:#00d4ff;
 }
-.home-div i{display:block;width:120px;height:2px;background:#ffe566;border-radius:2px;margin:0 .5rem;opacity:.85}
+.home-div i{display:block;width:130px;height:2px;background:#1e293b;border-radius:2px;margin:0 .65rem}
 .home-div .home-lock{display:block;width:22px;height:22px}
-.startrow{width:100%;max-width:30rem;margin:.2rem auto .5rem;-webkit-box-ordinal-group:0;order:-1}
+.startrow{width:100%;max-width:28rem;margin:.3rem auto .6rem;-webkit-box-ordinal-group:0;order:-1}
 #run{
-  display:block;position:relative;width:100%;border:0;border-radius:999px;
-  background:#ffe566;background:-webkit-linear-gradient(0deg,#ffe566,#ffd000);
-  background:linear-gradient(90deg,#ffe566,#ffd000);
-  color:#1239a8;font:inherit;font-size:1.7rem;font-weight:800;padding:.85rem 3.4rem;
-  cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.28);
+  display:block;position:relative;width:100%;border:0;border-radius:16px;
+  background:#00d4ff;
+  background:-webkit-linear-gradient(0deg,#00d4ff,#0284c7);
+  background:linear-gradient(90deg,#00d4ff,#0284c7);
+  color:#040812;font:inherit;font-size:1.5rem;font-weight:900;padding:.88rem 3rem;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,212,255,.32);
 }
-#run:disabled{opacity:.75;cursor:default}
-#run.retry{background:#ffd000;background:-webkit-linear-gradient(0deg,#ffd000,#ffe566);background:linear-gradient(90deg,#ffd000,#ffe566)}
-#sub{margin:.55rem 0 0;color:#d7e2ff;font-size:.86rem;font-weight:700}
+#run:disabled{opacity:.65;cursor:default}
+#run.retry{
+  background:#fbbf24;
+  background:-webkit-linear-gradient(0deg,#fbbf24,#d97706);
+  background:linear-gradient(90deg,#fbbf24,#d97706);
+  box-shadow:0 8px 25px rgba(251,191,36,.3);
+}
+#sub{margin:.65rem 0 0;color:#94a3b8;font-size:.95rem;font-weight:700}
 #homeInfo{
-  width:min(720px,100%);margin:.6rem auto 0;padding:.75rem 1.4rem .7rem;text-align:center;
-  background:#1239a8;border:2px solid #2a5fd4;border-radius:22px;
-  box-shadow:0 6px 20px rgba(0,0,0,.22);
+  width:min(740px,100%);margin:.65rem auto 0;padding:.9rem 1.5rem .85rem;text-align:center;
+  background:#0f172a;border:1.5px solid #1e293b;border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
 }
 #homeInfo .label,#loaderInfo .label{
-  margin:0 0 .4rem;font-size:.78rem;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;color:#ffe566;
+  margin:0 0 .5rem;font-size:.82rem;font-weight:800;letter-spacing:.04em;
+  color:#64748b;
 }
 .hi-row{
   display:-webkit-box;display:-webkit-flex;display:flex;
@@ -85,15 +147,15 @@ body{
   -webkit-justify-content:center;justify-content:center;margin:-.3rem;
 }
 .hi-chip{
-  margin:.3rem;padding:.4rem .9rem;border:1.5px solid #2a5fd4;border-radius:999px;
-  background:#1848c8;font-size:1rem;white-space:nowrap;
+  margin:.3rem;padding:.45rem 1rem;border:1.5px solid #1e293b;border-radius:12px;
+  background:#090d1a;font-size:.95rem;white-space:nowrap;
 }
-.hi-chip .k{color:#ffe566;font-weight:800;margin-right:.45rem}
-.hi-chip b{color:#fff;font-weight:800}
+.hi-chip .k{color:#94a3b8;font-weight:700;margin-left:.45rem}
+.hi-chip b{color:#f8fafc;font-weight:800}
 .hi-br{-webkit-flex-basis:100%;flex-basis:100%;width:100%;height:0}
-.hi-chip.ok{background:rgba(255,229,102,.16);border-color:#ffe566}
-.hi-chip.ok .k,.hi-chip.ok b{color:#ffe566}
-.hi-chip.off b{color:#b8c7ef}
+.hi-chip.ok,.hi-chip.on{background:rgba(16,185,129,.12);border-color:#10b981}
+.hi-chip.ok .k,.hi-chip.ok b,.hi-chip.on .k,.hi-chip.on b{color:#34d399}
+.hi-chip.off b{color:#94a3b8}
 
 /* Loader */
 #loader{
@@ -105,128 +167,129 @@ body{
   -webkit-justify-content:center;justify-content:center;
 }
 #loader .postjb-card{
-  width:min(720px,100%);margin:0 auto;padding:1.1rem 2rem 1rem;text-align:center;
-  background:#1239a8;border:2px solid #2a5fd4;border-radius:26px;
-  box-shadow:0 8px 28px rgba(0,0,0,.28);
+  width:min(740px,100%);margin:0 auto;padding:1.5rem 2.2rem 1.4rem;text-align:center;
+  background:#0f172a;border:1.5px solid #1e293b;border-radius:24px;
+  box-shadow:0 14px 40px rgba(0,0,0,.55);
 }
 #status.pill-run,#statusMsg .pill-run{
-  display:block;width:100%;max-width:30rem;margin:.1rem auto .55rem;
-  border:0;border-radius:999px;
-  background:#ffe566;background:-webkit-linear-gradient(0deg,#ffe566,#ffd000);
-  background:linear-gradient(90deg,#ffe566,#ffd000);
-  color:#1239a8;font-size:1.55rem;font-weight:800;padding:.7rem 3.2rem;
-  box-shadow:0 8px 20px rgba(0,0,0,.28);
+  display:block;width:100%;max-width:28rem;margin:.2rem auto .6rem;
+  border:0;border-radius:16px;
+  background:#00d4ff;
+  background:-webkit-linear-gradient(0deg,#00d4ff,#0284c7);
+  background:linear-gradient(90deg,#00d4ff,#0284c7);
+  color:#040812;font-size:1.45rem;font-weight:900;padding:.8rem 2.8rem;
+  box-shadow:0 8px 25px rgba(0,212,255,.3);
 }
 #status{display:none}
 body.running #status{display:block}
 #progWrap{display:none !important}
 #progTrack,#progBar,#progressPct,#progLabel{display:none !important}
 #elapsedMsg{
-  margin:.55rem 0 .65rem;color:#ffe566;font-weight:800;font-size:1.55rem;
-  letter-spacing:.04em;display:none;font-variant-numeric:tabular-nums;
+  margin:.6rem 0 .7rem;color:#fbbf24;font-weight:800;font-size:1.45rem;
+  letter-spacing:.04em;display:none;font-variant-numeric:tabular-nums;direction:ltr;
 }
-/* No live clock during jailbreak - only final time on done/fail */
 body.done #elapsedMsg,body.fail #elapsedMsg{display:block}
-#msg{display:none;margin:.1rem auto .35rem;font-size:1.55rem;font-weight:800}
-#msg.ok{color:#ffe566}
-#msg.bad{color:#ff8a8a}
-#successMsg,#failMsg{display:none;margin:.1rem auto .55rem;font-size:1.15rem;font-weight:800}
+#msg{display:none;margin:.15rem auto .4rem;font-size:1.5rem;font-weight:900}
+#msg.ok{color:#34d399}
+#msg.bad{color:#f87171}
+#successMsg,#failMsg{display:none;margin:.15rem auto .6rem;font-size:1.15rem;font-weight:800}
 #successMsg{
-  width:100%;max-width:30rem;border:0;border-radius:999px;
-  background:#ffe566;background:-webkit-linear-gradient(0deg,#ffe566,#ffd000);
-  background:linear-gradient(90deg,#ffe566,#ffd000);
-  color:#1239a8;font-size:1.55rem;padding:.7rem 3.2rem;
-  box-shadow:0 8px 20px rgba(0,0,0,.28);text-align:center;
+  width:100%;max-width:28rem;border:0;border-radius:16px;
+  background:#10b981;
+  background:-webkit-linear-gradient(0deg,#10b981,#059669);
+  background:linear-gradient(90deg,#10b981,#059669);
+  color:#040812;font-size:1.45rem;padding:.8rem 2.8rem;
+  box-shadow:0 8px 25px rgba(16,185,129,.3);text-align:center;
 }
-#successMsg .check{display:inline-block;width:14px;height:8px;margin:0 8px 3px 0;border-left:3px solid #1239a8;border-bottom:3px solid #1239a8;-webkit-transform:rotate(45deg);transform:rotate(45deg)}
+#successMsg .check{display:inline-block;width:14px;height:8px;margin:0 0 3px 8px;border-left:3px solid #040812;border-bottom:3px solid #040812;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}
 #failMsg{
-  padding:.55rem 1.2rem;border-radius:999px;
-  background:rgba(248,113,113,.18);border:1px solid rgba(248,113,113,.45);
-  color:#ffb4b4;
+  padding:.65rem 1.3rem;border-radius:12px;
+  background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.4);
+  color:#fca5a5;
 }
 body.done #status,body.fail #status{display:none!important}
 body.done #msg,body.done #successMsg{display:block}
 body.fail #msg,body.fail #failMsg{display:block}
 body.done #progWrap,body.fail #progWrap{display:none}
-body.done #progBar{width:100%!important;background:#ffe566;background:-webkit-linear-gradient(0deg,#ffe566,#ffd000);background:linear-gradient(90deg,#ffe566,#ffd000)}
+body.done #progBar{width:100%!important;background:#10b981}
 #loaderInfo{
-  width:min(720px,100%);margin:.7rem auto 0;padding:.75rem 1.4rem .7rem;text-align:center;
-  background:#1239a8;border:2px solid #2a5fd4;border-radius:22px;
-  box-shadow:0 6px 20px rgba(0,0,0,.22);
+  width:min(740px,100%);margin:.75rem auto 0;padding:.9rem 1.5rem .85rem;text-align:center;
+  background:#0f172a;border:1.5px solid #1e293b;border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
 }
-#loaderInfo .label + .hi-row + .label{margin-top:.55rem}
+#loaderInfo .label + .hi-row + .label{margin-top:.65rem}
 
 /* Options rail */
 .settings{
-  position:fixed;top:0;right:0;bottom:0;width:23rem;z-index:40;
-  overflow-y:auto;padding:1.35rem 1.25rem 1.8rem;text-align:left;
-  background:#1239a8;background:-webkit-linear-gradient(top,#1848c8 0%,#1239a8 55%,#0d2b7a 100%);
-  background:linear-gradient(180deg,#1848c8 0%,#1239a8 55%,#0d2b7a 100%);
-  border-left:1px solid rgba(255,229,102,.28);
-  box-shadow:-10px 0 28px rgba(0,0,0,.28);
+  position:fixed;top:0;left:0;bottom:0;width:23rem;z-index:40;
+  overflow-y:auto;padding:1.4rem 1.3rem 1.8rem;text-align:right;
+  background:#0b1120;
+  border-right:1.5px solid #1e293b;
+  box-shadow:12px 0 35px rgba(0,0,0,.5);
 }
-.settings .label{margin:0 0 .85rem;font-size:1.15rem;font-weight:800;color:#ffe566;letter-spacing:.01em}
-.settings .label.slim{margin:1.15rem 0 .45rem;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffe566}
-.settings .hint{color:#d7e2ff;opacity:.9;font-size:.84rem;font-weight:700;margin:.45rem 0 0}
+.settings .label{margin:0 0 .85rem;font-size:1.15rem;font-weight:900;color:#f8fafc}
+.settings .label.slim{margin:1.2rem 0 .45rem;font-size:.82rem;font-weight:800;color:#64748b}
+.settings .hint{color:#94a3b8;font-size:.84rem;font-weight:600;margin:.45rem 0 0;line-height:1.5}
 .settings .opt{
   display:block;width:100%;min-height:3.3rem;padding:.85rem 1rem;margin:0;
   border-radius:14px;text-align:center;font:inherit;cursor:default;
-  background:rgba(255,229,102,.12);border:1.5px solid #ffe566;
-  box-shadow:0 2px 10px rgba(0,0,0,.18);color:#ffe566;
+  background:rgba(0,212,255,.08);border:1.5px solid #00d4ff;
+  box-shadow:0 4px 14px rgba(0,212,255,.1);color:#00d4ff;
 }
-.settings .opt .t{display:block;font-size:1.05rem;font-weight:800}
-.settings .opt .d{display:block;font-size:.78rem;color:#d7e2ff;margin-top:.2rem;font-weight:700}
+.settings .opt .t{display:block;font-size:1.05rem;font-weight:900}
+.settings .opt .d{display:block;font-size:.82rem;color:#cbd5e1;margin-top:.2rem;font-weight:700;direction:ltr}
 .settings .chip-row{margin:.35rem 0 0}
 .settings .mini{
-  display:inline-block;margin:.25rem .25rem 0 0;padding:.45rem .75rem;border-radius:999px;
-  background:#1848c8;border:1.5px solid #2a5fd4;color:#ffe566;font-weight:800;font-size:.85rem;
+  display:inline-block;margin:.25rem 0 0 .25rem;padding:.48rem .9rem;border-radius:10px;
+  background:#0f172a;border:1.5px solid #1e293b;color:#cbd5e1;font-weight:800;font-size:.86rem;
 }
-.settings .mini.on{background:#ffe566;color:#1239a8;border-color:#ffe566}
+.settings .mini.on{background:#00d4ff;color:#040812;border-color:#00d4ff}
 
 #footer{
-  position:fixed;left:0;right:23rem;bottom:.7rem;margin:0;padding:0;z-index:2;
-  text-align:center;color:#d7e2ff;font-size:.85rem;font-weight:700;pointer-events:none;
+  position:fixed;right:0;left:23rem;bottom:.8rem;margin:0;padding:0;z-index:2;
+  text-align:center;color:#94a3b8;font-size:.88rem;font-weight:700;pointer-events:none;
 }
-#footer a{pointer-events:auto;color:#ffe566;text-decoration:none}
+#footer a{pointer-events:auto;color:#fbbf24;text-decoration:none}
 #footer b{font-weight:800}
 
 #wrap,#out,#state,#ramBox,#spin{display:none!important}
 body.running #splash,body.done #splash,body.fail #splash{display:none!important}
 body.running #loader,body.done #loader,body.fail #loader{display:-webkit-box;display:-webkit-flex;display:flex}
 
-/* Welcome splash after GoldHEN - img (PS4 WebKit often skips CSS backgrounds) */
+/* Welcome splash after GoldHEN */
 #ghWelcome{
   display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:99999;
-  margin:0;padding:0;background:#1848c8;overflow:hidden;
+  margin:0;padding:0;background:#070b14;overflow:hidden;
 }
 #ghWelcome img{
   display:block;width:100%;height:100%;border:0;
-  object-fit:cover; /* ignored on old WK; width/height still fill */
+  object-fit:cover;
 }
 body.welcome #ghWelcome{display:block!important}
 body.welcome #splash,body.welcome #loader,body.welcome .settings,body.welcome .ver-pill,body.welcome #footer,body.welcome .wrap{display:none!important}
 
 @media (max-width:1100px){
-  .wrap{padding-right:1.4rem}
+  .wrap{padding-left:1.5rem}
   .settings{display:none}
-  .ver-pill{right:1rem}
-  #footer{right:0}
-  .home-title{font-size:2.4rem}
+  .ver-pill{left:1rem}
+  #footer{left:0}
+  .home-title{font-size:2.1rem}
+  .brand-badge{font-size:1.15rem}
 }
 
-.recent-head{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;gap:.5rem;margin:1.15rem 0 .45rem}
+.recent-head{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;gap:.5rem;margin:1.2rem 0 .45rem}
 .recent-head .label.slim{margin:0}
 .recent-head .mini{cursor:pointer;-webkit-user-select:none;user-select:none}
 .history{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:0;margin:.35rem 0 0}
-.hrow{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.92rem}
+.hrow{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #1e293b;font-size:.9rem}
 .hrow:last-child{border:0}
-.hrow .ok{color:#7dffb3}.hrow .fail{color:#ff8a8a}.hrow .hang{color:#ffc857}
+.hrow .ok{color:#34d399}.hrow .fail{color:#f87171}.hrow .hang{color:#fbbf24}
 .hrow .hmeta{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:.1rem;min-width:0}
-.hrow .hdate{display:block;font-weight:600;color:#9db0d8;font-variant-numeric:tabular-nums;font-size:.82rem}
-.hrow .hdur{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800}
-#historyEmpty{margin:.35rem 0 0;color:#9db0d8;font-size:.9rem}
+.hrow .hdate{display:block;font-weight:600;color:#64748b;font-variant-numeric:tabular-nums;font-size:.8rem;direction:ltr;text-align:right}
+.hrow .hdur{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800;direction:ltr}
+#historyEmpty{margin:.35rem 0 0;color:#64748b;font-size:.88rem}
 #historyEmpty[hidden]{display:none!important}
-.settings .mini.model-pick.on{background:#ffe566;color:#1239a8;border-color:#ffe566}
+.settings .mini.model-pick.on{background:#00d4ff;color:#040812;border-color:#00d4ff}
 </style>
   <link rel="preload" as="image" href="welcome-goldhen.jpg">
 </head>
@@ -257,44 +320,61 @@ window.jailbreakSuccess = function () {
       return;
     }
   } catch (e) {}
-  // __fbOnDone not ready yet; finishUI will show welcome
 };
 </script>
-<script>try{document.title='';}catch(e){}</script>
 <div id="ghWelcome" aria-hidden="true"><img src="welcome-goldhen.jpg" alt="Welcome to GoldHEN by SiSTRo" width="1280" height="720"></div>
 <div class="wrap">
-  <div class="ver-pill" id="appVer">13.52-14.02</div>
+  <div class="ver-pill" id="appVer">13.52 - 14.02</div>
 
   <div id="splash" aria-hidden="false">
     <main class="main">
       <section class="hero card home-panel" id="homeCard">
+        <div class="brand-box">
+          <div class="brand-badge">المنسي لخدمات البلايستيشن</div>
+          <div class="brand-services">دعم • صيانة • بيع • ألعاب</div>
+          <div class="brand-contact">
+            <span class="brand-phone-num">01065670546</span>
+            <span class="brand-icons" aria-hidden="true">
+              <span class="brand-icon phone">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+                </svg>
+              </span>
+              <span class="brand-icon wa">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.77 14.03c-.24.68-1.42 1.3-1.95 1.38-.5.08-1.14.11-1.83-.11-.42-.13-.97-.31-1.67-.61-2.94-1.27-4.86-4.23-5.01-4.43-.15-.2-1.2-1.59-1.2-3.04s.76-2.16 1.03-2.45c.27-.29.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.59.83 2.03.9 2.18.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.12.07.71-.17 1.39z"/>
+                </svg>
+              </span>
+            </span>
+          </div>
+        </div>
         <div class="home-deco" aria-hidden="true">
-          <div class="home-title"><span class="wk">PS4</span> 13.52 / 14.00 / 14.02 Jailbreak</div>
+          <div class="home-title">تهكير <span class="wk">PS4</span> إصدار 13.52 / 14.00 / 14.02</div>
           <div class="home-div">
             <i></i>
             <svg class="home-lock" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <rect x="4.5" y="10.5" width="15" height="11" rx="2.5" fill="#ffe566"/>
-              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="#ffe566" stroke-width="2.2" stroke-linecap="round"/>
-              <circle cx="12" cy="15.3" r="1.6" fill="#fff"/>
-              <rect x="11.3" y="15.8" width="1.4" height="3" rx=".7" fill="#fff"/>
+              <rect x="4.5" y="10.5" width="15" height="11" rx="2.5" fill="#00d4ff"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="#00d4ff" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="12" cy="15.3" r="1.6" fill="#0f172a"/>
+              <rect x="11.3" y="15.8" width="1.4" height="3" rx=".7" fill="#0f172a"/>
             </svg>
             <i></i>
           </div>
         </div>
         <div class="startrow">
-          <button id="run" type="button">Start</button>
+          <button id="run" type="button">ابدأ التهكير</button>
         </div>
-        <p id="sub">Press Start when ready</p>
+        <p id="sub">اضغط على ابدأ التهكير عندما تكون جاهزاً</p>
       </section>
 
-      <section class="card home-info" id="homeInfo" aria-label="Console info">
-        <p class="label">Console</p>
+      <section class="card home-info" id="homeInfo" aria-label="معلومات الجهاز">
+        <p class="label">معلومات الجهاز</p>
         <div class="hi-row">
-          <div class="hi-chip"><span class="k">Model</span><b id="hiModel">-</b></div>
-          <div class="hi-chip"><span class="k">FW</span><b id="hiFw">-</b></div>
-          <div class="hi-chip"><span class="k">Chain</span><b id="hiChain">-</b></div>
+          <div class="hi-chip"><span class="k">الموديل</span><b id="hiModel">-</b></div>
+          <div class="hi-chip"><span class="k">الإصدار</span><b id="hiFw">-</b></div>
+          <div class="hi-chip"><span class="k">الآلية</span><b id="hiChain">-</b></div>
           <span class="hi-br" aria-hidden="true"></span>
-          <div class="hi-chip"><span class="k">Auto-start</span><b id="hiAuto">-</b></div>
+          <div class="hi-chip"><span class="k">التشغيل التلقائي</span><b id="hiAuto">-</b></div>
         </div>
       </section>
     </main>
@@ -302,67 +382,86 @@ window.jailbreakSuccess = function () {
 
   <main id="loader" hidden>
     <section class="hero card center postjb-card home-panel">
+      <div class="brand-box">
+        <div class="brand-badge">المنسي لخدمات البلايستيشن</div>
+        <div class="brand-services">دعم • صيانة • بيع • ألعاب</div>
+        <div class="brand-contact">
+          <span class="brand-phone-num">01065670546</span>
+          <span class="brand-icons" aria-hidden="true">
+            <span class="brand-icon phone">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+              </svg>
+            </span>
+            <span class="brand-icon wa">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.77 14.03c-.24.68-1.42 1.3-1.95 1.38-.5.08-1.14.11-1.83-.11-.42-.13-.97-.31-1.67-.61-2.94-1.27-4.86-4.23-5.01-4.43-.15-.2-1.2-1.59-1.2-3.04s.76-2.16 1.03-2.45c.27-.29.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.59.83 2.03.9 2.18.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.07 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.12.07.71-.17 1.39z"/>
+              </svg>
+            </span>
+          </span>
+        </div>
+      </div>
       <div class="home-deco" aria-hidden="true">
-        <div class="home-title" id="titleMsg"><span class="wk">PS4</span> 13.52 / 14.00 / 14.02 Jailbreak</div>
+        <div class="home-title" id="titleMsg">تهكير <span class="wk">PS4</span> إصدار 13.52 / 14.00 / 14.02</div>
         <div class="home-div">
           <i></i>
           <svg class="home-lock" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-            <rect x="4.5" y="10.5" width="15" height="11" rx="2.5" fill="#ffe566"/>
-            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="#ffe566" stroke-width="2.2" stroke-linecap="round"/>
-            <circle cx="12" cy="15.3" r="1.6" fill="#fff"/>
-            <rect x="11.3" y="15.8" width="1.4" height="3" rx=".7" fill="#fff"/>
+            <rect x="4.5" y="10.5" width="15" height="11" rx="2.5" fill="#00d4ff"/>
+            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="#00d4ff" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="12" cy="15.3" r="1.6" fill="#0f172a"/>
+            <rect x="11.3" y="15.8" width="1.4" height="3" rx=".7" fill="#0f172a"/>
           </svg>
           <i></i>
         </div>
       </div>
-      <p class="pill-run" id="status">Jailbreak started</p>
+      <p class="pill-run" id="status">بدأ التهكير</p>
       <div id="progWrap" hidden aria-hidden="true">
         <div id="progTrack"><div id="progBar"></div></div>
         <div id="progressPct">0%</div>
-        <div id="progLabel">Ready</div>
+        <div id="progLabel">جاهز</div>
       </div>
       <p id="elapsedMsg">0s</p>
-      <p id="msg">DONE</p>
-      <div id="successMsg"><span class="check"></span> Jailbroken</div>
-      <div id="failMsg">Jailbreak failed - refresh the page and try again</div>
+      <p id="msg">تم</p>
+      <div id="successMsg"><span class="check"></span> تم التهكير بنجاح</div>
+      <div id="failMsg">فشل التهكير - حدّث الصفحة وحاول مرة أخرى</div>
     </section>
 
-    <section class="card postjb-info" id="loaderInfo" aria-label="Payloads and console">
-      <p class="label">Payloads</p>
+    <section class="card postjb-info" id="loaderInfo" aria-label="الحزم ومعلومات الجهاز">
+      <p class="label">الحزم (Payloads)</p>
       <div id="payloadList" class="hi-row">
-        <div id="plGoldhen" class="hi-chip off"><span class="k">GoldHEN</span><b id="plGoldhenTag">WAIT</b></div>
+        <div id="plGoldhen" class="hi-chip off"><span class="k">GoldHEN</span><b id="plGoldhenTag">انتظار</b></div>
       </div>
-      <p class="label">Console</p>
+      <p class="label">معلومات الجهاز</p>
       <div class="hi-row postjb-meta">
-        <div class="hi-chip"><span class="k">Model</span><b id="ldModel">-</b></div>
-        <div class="hi-chip"><span class="k">FW</span><b id="ldFw">-</b></div>
-        <div class="hi-chip"><span class="k">Chain</span><b id="ldChain">-</b></div>
+        <div class="hi-chip"><span class="k">الموديل</span><b id="ldModel">-</b></div>
+        <div class="hi-chip"><span class="k">الإصدار</span><b id="ldFw">-</b></div>
+        <div class="hi-chip"><span class="k">الآلية</span><b id="ldChain">-</b></div>
       </div>
     </section>
   </main>
 
-  <section class="settings card" id="settingsPanel" aria-label="Options">
-    <p class="label">Options</p>
-    <p class="label slim">Payload</p>
+  <section class="settings card" id="settingsPanel" aria-label="الخيارات">
+    <p class="label">الخيارات</p>
+    <p class="label slim">الحزمة الأساسية</p>
     <div class="opt" id="payloadTile">
       <span class="t">GoldHEN</span>
       <span class="d" id="payloadVer">v2.4b18.14</span>
     </div>
-    <p class="hint" id="payloadHint">GoldHEN for FW 13.52 / 14.00 / 14.02</p>
-    <p class="label slim">Timing</p>
+    <p class="hint" id="payloadHint">حزمة GoldHEN لإصدارات 13.52 / 14.00 / 14.02</p>
+    <p class="label slim">التوقيت</p>
     <div class="chip-row">
-      <span class="mini" id="autoStartTile" tabindex="0" role="button" style="cursor:pointer">Auto-start <span id="autoStartState">Off</span></span>
+      <span class="mini" id="autoStartTile" tabindex="0" role="button" style="cursor:pointer">تشغيل تلقائي: <span id="autoStartState">متوقف</span></span>
     </div>
-    <p class="hint" id="autoHint">Press to turn on. Starts the jailbreak 3 seconds after the page opens.</p>
+    <p class="hint" id="autoHint">اضغط للتفعيل. يبدأ التهكير تلقائياً بعد 3 ثوانٍ من فتح الصفحة.</p>
     <div class="recent-head">
-      <p class="label slim">Recent</p>
-      <span class="mini" id="historyClear" tabindex="0" role="button">Clear Log</span>
+      <p class="label slim">المحاولات الأخيرة</p>
+      <span class="mini" id="historyClear" tabindex="0" role="button">مسح السجل</span>
     </div>
     <div id="historyList" class="history"></div>
-    <p class="hint" id="historyEmpty">No runs yet</p>
+    <p class="hint" id="historyEmpty">لا توجد محاولات مسجلة بعد</p>
   </section>
 
-  <footer id="footer"><b>Developed by <a href="https://github.com/X-F1REBALL-X" target="_blank" rel="noopener">X-F1REBALL-X</a></b></footer>
+  <footer id="footer"><b>المنسي لخدمات البلايستيشن • 01065670546</b></footer>
 </div>
 
 <div id="wrap" style="display:none"><div id="state"></div><div id="out"></div></div>
@@ -452,7 +551,7 @@ window.jailbreakSuccess = function () {
       elapsedStart = 0;
       if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = 0; }
       startElapsed();
-      if (statusEl) statusEl.textContent = 'Jailbreaking';
+      if (statusEl) statusEl.textContent = 'جاري التهكير...';
     } catch (e) {}
   };
 
@@ -514,7 +613,7 @@ window.jailbreakSuccess = function () {
       var cls = e.result === 'ok' ? 'ok' : 'fail';
       right.className = cls + ' hdur';
       var dur = e.duration || (e.ms != null ? formatElapsed(e.ms) : '');
-      right.textContent = (e.result === 'ok' ? 'OK' : 'FAIL') + (dur ? ('  ' + dur) : '');
+      right.textContent = (e.result === 'ok' ? 'ناجح' : 'فشل') + (dur ? ('  ' + dur) : '');
       row.appendChild(left);
       row.appendChild(right);
       list.appendChild(row);
@@ -778,19 +877,19 @@ window.jailbreakSuccess = function () {
     setText('hiModel', model);
     setText('hiFw', fw);
     setText('hiChain', CHAIN);
-    setText('hiAuto', autoOn ? 'On' : 'Off');
+    setText('hiAuto', autoOn ? 'مفعل' : 'متوقف');
     setText('ldModel', model);
     setText('ldFw', fw);
     setText('ldChain', CHAIN);
-    setText('autoStartState', autoOn ? 'On' : 'Off');
+    setText('autoStartState', autoOn ? 'مفعل' : 'متوقف');
     if (fw && fw !== '-') {
-      setText('appVer', '13.52-14.02');
+      setText('appVer', '13.52 - 14.02');
       var ht = document.querySelector('.home-title');
-      if (ht) ht.innerHTML = '<span class="wk">PS4</span> ' + fw + ' Jailbreak';
+      if (ht) ht.innerHTML = 'تهكير <span class="wk">PS4</span> إصدار ' + fw;
       var tm = document.getElementById('titleMsg');
-      if (tm) tm.innerHTML = '<span class="wk">PS4</span> ' + fw + ' Jailbreak';
+      if (tm) tm.innerHTML = 'تهكير <span class="wk">PS4</span> إصدار ' + fw;
       var ph = document.getElementById('payloadHint');
-      if (ph) ph.textContent = 'GoldHEN for FW ' + fw;
+      if (ph) ph.textContent = 'حزمة GoldHEN لإصدار ' + fw;
     }
     var tile = document.getElementById('autoStartTile');
     if (tile) {
@@ -853,18 +952,17 @@ window.jailbreakSuccess = function () {
     if (chip) chip.className = 'hi-chip' + (cls ? (' ' + cls) : ' off');
   }
   window.__fbSetPayload = function (ok) {
-    if (ok) setPayloadTag('LOADED', 'on');
-    else setPayloadTag('FAIL', 'off');
+    if (ok) setPayloadTag('تم التحميل', 'on');
+    else setPayloadTag('فشل', 'off');
   };
 
   window.__fbResetProgress = function () {
     maxPct = 0;
     if (bar) bar.style.width = '0%';
     if (pctEl) pctEl.textContent = '0%';
-    if (label) label.textContent = 'Ready';
+    if (label) label.textContent = 'جاهز';
   };
   window.__fbProgress = function (pct, text) {
-    /* Timer-only UI: ignore percent, keep status label soft. */
     if (statusEl && text) statusEl.textContent = text;
   };
 
@@ -888,10 +986,10 @@ window.jailbreakSuccess = function () {
   }
   function applyRetryStyle() {
     if (!wasStarted()) return;
-    b.textContent = 'Auto Retry';
+    b.textContent = 'إعادة محاولة تلقائية';
     b.className = 'retry';
     var sub = document.getElementById('sub');
-    if (sub) sub.textContent = 'Press Auto Retry when ready';
+    if (sub) sub.textContent = 'اضغط لإعادة المحاولة عندما تكون جاهزاً';
     detectInfo();
   }
   window.__fbShowRetry = function () { applyRetryStyle(); };
@@ -904,10 +1002,9 @@ window.jailbreakSuccess = function () {
     document.body.className = 'running';
     showLoader();
     maxPct = 0;
-    setPayloadTag('WAIT', 'off');
+    setPayloadTag('انتظار', 'off');
     if (elapsedMsgEl) elapsedMsgEl.textContent = '';
-    if (statusEl) statusEl.textContent = 'Preparing...';
-    /* Timer starts only when the real jailbreak chain begins (__fbStartElapsed). */
+    if (statusEl) statusEl.textContent = 'جاري التجهيز...';
     detectInfo();
     var s = document.createElement('script');
     s.type = 'module';
@@ -919,8 +1016,8 @@ window.jailbreakSuccess = function () {
       stopElapsed();
       document.body.className = 'fail';
       showLoader();
-      setPayloadTag('FAIL', 'off');
-      if (msgEl) { msgEl.textContent = 'FAILED'; msgEl.className = 'bad'; }
+      setPayloadTag('فشل', 'off');
+      if (msgEl) { msgEl.textContent = 'فشل'; msgEl.className = 'bad'; }
       if (failMsgEl) failMsgEl.style.display = 'block';
       clearAuto();
       detectInfo();
@@ -931,17 +1028,17 @@ window.jailbreakSuccess = function () {
   function cancelAutoTimer() {
     if (autoTimer) { clearInterval(autoTimer); autoTimer = 0; }
     var sub = document.getElementById('sub');
-    if (sub && !wasStarted()) sub.textContent = 'Press Start when ready';
+    if (sub && !wasStarted()) sub.textContent = 'اضغط على ابدأ التهكير عندما تكون جاهزاً';
   }
   function beginAutoCountdown() {
     if (autoTimer || starting || wasStarted()) return;
     if (document.body.className.indexOf('done') >= 0 || document.body.className.indexOf('welcome') >= 0) return;
     var left = 3;
     var sub = document.getElementById('sub');
-    if (sub) sub.textContent = 'Auto-start in ' + left + 's';
+    if (sub) sub.textContent = 'التشغيل التلقائي خلال ' + left + ' ثوانٍ...';
     autoTimer = setInterval(function () {
       left--;
-      if (left > 0) { if (sub) sub.textContent = 'Auto-start in ' + left + 's'; return; }
+      if (left > 0) { if (sub) sub.textContent = 'التشغيل التلقائي خلال ' + left + ' ثوانٍ...'; return; }
       clearInterval(autoTimer); autoTimer = 0;
       if (b.disabled) return;
       try { sessionStorage.setItem(COUNT, '0'); } catch (e) {}
@@ -963,7 +1060,7 @@ window.jailbreakSuccess = function () {
   }
 
   b.onclick = function () {
-    try { if (sessionStorage.getItem('fb_jb_done') === '1') { var s=document.getElementById('sub'); if (s) s.textContent='Already jailbroken this session. Close browser to retry.'; return; } } catch (e) {}
+    try { if (sessionStorage.getItem('fb_jb_done') === '1') { var s=document.getElementById('sub'); if (s) s.textContent='تم التهكير في هذه الجلسة بالفعل. أغلق المتصفح لإعادة المحاولة.'; return; } } catch (e) {}
 
     if (b.disabled) return;
     cancelAutoTimer();
@@ -977,7 +1074,7 @@ window.jailbreakSuccess = function () {
     if (document.body.className.indexOf('done') >= 0 || document.body.className.indexOf('welcome') >= 0) { clearAuto(); return; }
     freezeElapsed();
     stopElapsed();
-    setPayloadTag('WAIT', 'off');
+    setPayloadTag('انتظار', 'off');
     applyRetryStyle();
     var n = bumpAuto();
     if (n > LIMIT) {
@@ -989,9 +1086,7 @@ window.jailbreakSuccess = function () {
       } catch (e) {}
       return;
     }
-    /* Only log the final give-up - intermediate auto-retries clutter Recent. */
-    if (statusEl) statusEl.textContent = 'Retrying (' + n + '/' + LIMIT + ')...';
-    /* Same short gap as origin/master (repo almost lands first try). */
+    if (statusEl) statusEl.textContent = 'إعادة المحاولة (' + n + '/' + LIMIT + ')...';
     setTimeout(function () {
       try { location.reload(); } catch (e) {}
     }, 100);
@@ -1009,7 +1104,6 @@ window.jailbreakSuccess = function () {
     } catch (e) {}
     try { if (typeof window.__fbShowWelcomeNow === 'function') window.__fbShowWelcomeNow(); } catch (e) {}
     detectInfo();
-    // Show SiSTRo welcome briefly, then force a blank page (PS4 often ignores back/close).
     function leaveWelcome() {
       try { window.close(); } catch (e0) {}
       try {
